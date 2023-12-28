@@ -1,0 +1,77 @@
+body {
+	background-color: #000;
+}
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+/*adding a black bg to the body to make things clearer*/
+.wrapper {
+	position: relative;
+  }
+
+canvas {display: block;
+		position:absolute;
+		top: 0;
+		opacity:0.4;
+}
+.hover {
+	position: absolute;
+	top: 10;
+	left: 10;
+	font-size:18px;
+ }
+#console {
+	font-family: courier, monospace;
+	color: #fff;
+	width:auto;
+	margin-left:5px;
+	margin-right:auto;
+	margin-top:10px;
+
+}
+
+a {
+	color: #0f0;
+	text-decoration: none;
+}
+
+#a {
+	color: #0f0;
+}
+#a:hover {
+    color: aqua;
+    outline: 0;
+}
+a:hover {
+    color: aqua;
+    outline: 0;
+}
+
+#c {
+	color: #0bc;
+}
+
+#b {
+	color: #ff0096;
+}
+
+#k {
+    	animation: change 50s;
+}
+
+#op{
+    	color: #888888
+}
+
+@keyframes change {
+    	0%  { color:  #0f0; }
+    	50% { color:  #0f0; }
+    	99% { color: black; }
+}
+
+.footer{
+	padding-top: 0.1em;
+	align-content: center;
+	color: #0f0;
+
+}
