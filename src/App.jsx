@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import { useState, useEffect } from 'react';
+import { Loader } from '@react-three/drei';
+import { Suspense } from 'react';
 
 const audio = new Audio("./whoosh.wav");
 
@@ -29,8 +31,12 @@ const App = function(){
             position: [ -3, 1.5, 4 ]
         } }
     >
+        <Suspense>
         <Experience />
+        </Suspense>
+        
     </Canvas>
+    <Loader />
         
     </>)
 }

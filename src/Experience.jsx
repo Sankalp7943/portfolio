@@ -1,6 +1,7 @@
 import { Text, Html, ContactShadows, PresentationControls, Float, Environment, useGLTF, Plane } from '@react-three/drei'
 import * as THREE from 'three'
 import {isMobile} from 'react-device-detect';
+import Button from './components/Button';
 
 
 
@@ -43,7 +44,7 @@ export default function Experience()
                     <Plane args={[200, 200]} rotation={[-Math.PI / 2, 0, 0]}>
                         <meshStandardMaterial color="#000000" roughness={1} metalness={0.5} />
                     </Plane>
-
+                    
                     <Html
                         transform
                         wrapperClass="htmlScreen"
@@ -52,7 +53,8 @@ export default function Experience()
                         rotation-x={ - 0.256 }
 
                     >
-                        <iframe src="./data/index.html" />
+                   <iframe src="./data/index.html" name='myiframe'/>
+                        
                     </Html>
 
                     <pointLight 
@@ -90,6 +92,14 @@ export default function Experience()
             scale={ 5 }
             blur={ 1.5 }
         />
+            <Html
+                center
+                wrapperClass="htmlButton"
+                distanceFactor={ 10 }
+                position={ [ 8, -4, - 1.4 ] }
+            >
+                <Button name="Open" target_url="./data/index.html" />
+            </Html>
 
     </>
     }
@@ -138,6 +148,7 @@ export default function Experience()
                         rotation-x={ - 0.256 }
                     >   
                         <iframe src="./data/index.html"/>
+
                         
                     </Html>
 
@@ -171,13 +182,20 @@ export default function Experience()
         </PresentationControls>
 
         <ContactShadows
-            position-y={ - 1.4-2 }
+            position-y={ - 5 }
             opacity={ 0.4 }
             scale={ 5 }
             blur={ 1.5 }
         />
-
-    </>
+            <Html
+                center
+                wrapperClass="htmlButton"
+                distanceFactor={ 10 }
+                position={ [ 1, -3, - 1.4 ] }
+            >
+                <Button name="Open" target_url="./data/index.html" />
+            </Html>
+        </>
     }
     
 }
