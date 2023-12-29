@@ -20,6 +20,7 @@ const App = function(){
         <>
         <Canvas
         onClick={()=>setStartAudio(true)}
+        onTouchMove={()=>setStartAudio(true)}
         className="r3f"
         camera={ {
             fov: 45,
