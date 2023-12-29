@@ -1,28 +1,22 @@
-<span id="k">sankalpsharma@dev</span>:<span id="b">~</span><span id="c">$</span> git clone profiles/sankalp
-<span id="k">sankalpsharma@dev</span>:<span id="b">~</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->my_profile.txt<br>
-<p>
-Welcome to the matrix! My name is Neo, just kidding. This is <span id="k">Sankalp Sharma</span>. <!-- sjkfhskjf -->
-I am a <span id="k">Software Developer</span><!-- laglaglaglaglaglaglaglaglaglaglaglag -->
-Words that I follow, "<span id="k">Carpe Diem!</span>".
-</p>
-<p>I have a bachelors and masters in Computer Science Engineering.
-Currently working as a Staff Software Engineer @ <span id="k">NI</span>
-<p>I am comfortable with <span id="k">Python</span> and <span id="k">JavaScript</span>
+<span id="k">sankalpSharma@dev</span>:<span id="b">~</span><span id="c">$</span> git clone profiles/sankalp
 
-Download my resume: <span id="a"><a href="https://drive.google.com/file/d/1acqPl3l3t6g-ER21e6-_N4Frl1gKf34x/view?usp=sharing" target="_blank">Resume</a></span></p>
-<p>
+Welcome to the matrix! My name is Neo, just kidding.
+This is <span id="k">Sankalp Sharma</span>. I am a <span id="k">Software Developer.</span><!-- laglaglaglaglaglaglaglaglaglaglaglag -->
+</p>
+<p>I have a masters in Computer Science Engineering.
+Working as a Staff Software Engineer @ <span id="k">NI</span>.
+<p>I can play with <span id="k">Python</span> and <span id="k">JavaScript</span>
+
+Download my resume: <span id="a"><a href="https://drive.google.com/file/d/1acqPl3l3t6g-ER21e6-_N4Frl1gKf34x/view?usp=sharing" target="_blank">Resume</a></span>
+
 Some of the projects I developed:
 * <a href="https://github.com/Sankalp7943/optimisers-pypi-dev" target="_blank"><span id="a">PyPI Package - mliiitl</span></a>
-* <a href="http://sharmasankalp.com/i_used_the_js_to_learn_the_js/" target="_blank"><span id="a">Website - I used the JavaScript to learn the JavaScript</span></a>
 * <a href="https://chrome.google.com/webstore/detail/hydrate/mdjehejmpfdnjpncppighcnhajkhheco" target="_blank"><span id="a">Chrome Extension - Hydrate</span></a>
 * <a href="https://github.com/Sankalp7943/loadbalancer-vs-chaos-monkey" target="_blank"><span id="a">System Design - LoadBalancer VS ChaosMonkey</span></a>
-</p>
-</p>Here are some of my profiles over different platforms <a href="https://github.com/Sankalp7943" target="_blank"><span id="a">GitHub</span></a> <a href="https://www.linkedin.com/in/sankalp7943/" target="_blank"><span id="a">LinkedIn</span></a> <a href="https://www.instagram.com/_sankalp_sharma_/" target="_blank"><span id="a" target="_blank">Instagram</span></a></p>
 
-I have some hobbies too!
-Swimming, Skating, Trekking, Adventure Sports, Piano, Digital Music, Badminton, Traveling and I am always up for more.
-</p>
-If you want to get in touch<!-- slightdelayhere-->, feel free to send me an email at <!-- longlonglongcomment --><span id="k">sharmasankalp@outlook.com</span>.
+Here are some of my social handles:
+<a href="https://github.com/Sankalp7943" target="_blank"><span id="a">GitHub</span></a> <a href="https://www.linkedin.com/in/sankalp7943/" target="_blank"><span id="a">LinkedIn</span></a> <a href="https://www.instagram.com/_sankalp_sharma_/" target="_blank"><span id="a" target="_blank">Instagram</span></a>
+If you want to get in touch<!-- slightdelayhere-->, send me an email at <!-- longlonglongcomment --><span id="k">sharmasankalp@outlook.com</span>
 
 <p>Adios!</p>
-
+<br>

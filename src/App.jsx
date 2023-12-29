@@ -32,7 +32,7 @@ const App = function(){
         } }
     >
         <Suspense>
-        <Experience />
+            <Experience />
         </Suspense>
         
     </Canvas>

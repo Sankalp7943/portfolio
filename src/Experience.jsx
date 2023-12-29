@@ -109,7 +109,7 @@ export default function Experience()
 
         <color args={ [ '#000000' ] } attach="background" />
 
-        <Environment files="./hdri/potsdamer_platz_4k.hdr" />
+        {/* <Environment files="./hdri/potsdamer_platz_4k.hdr" /> */}
         
         <PresentationControls
             global
