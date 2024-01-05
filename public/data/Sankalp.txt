@@ -7,7 +7,7 @@ This is <span id="k">Sankalp Sharma</span>. I am a <span id="k">Software Develop
 Working as a Staff Software Engineer @ <span id="k">NI</span>.
 <p>I can play with <span id="k">Python</span> and <span id="k">JavaScript</span>
 
-Download my resume: <span id="a"><a href="https://drive.google.com/file/d/1acqPl3l3t6g-ER21e6-_N4Frl1gKf34x/view?usp=sharing" target="_blank">Resume</a></span>
+Download my resume: <span id="a"><a href="https://drive.google.com/file/d/1DMANSoq4byKVenARyFZxCwn-xk814co8/view?usp=sharing" target="_blank">Resume</a></span>
 
 Some of the projects I developed:
 * <a href="https://github.com/Sankalp7943/optimisers-pypi-dev" target="_blank"><span id="a">PyPI Package - mliiitl</span></a>
