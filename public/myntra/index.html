@@ -4,142 +4,347 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Myntra Price Alerts</title>
-<meta name="description" content="A Telegram bot that watches a Myntra listing and messages you when your size drops to your price.">
+<meta name="description" content="A Telegram bot that watches a Myntra listing in your size and messages you the moment it drops to your price.">
+<meta property="og:title" content="Myntra Price Alerts">
+<meta property="og:description" content="Pick your size, name your price. Get a Telegram message when the listing hits it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sharmasankalp.com/myntra">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 <style>
   :root {
     --bg: #fbfaf8;
     --panel: #ffffff;
-    --ink: #1d1c1a;
-    --muted: #605c56;
-    --line: #e5e1da;
+    --sunk: #f4f1ec;
+    --ink: #1a1917;
+    --muted: #625d55;
+    --faint: #8b857c;
+    --line: #e4dfd7;
     --accent: #1f6f5c;
+    --accent-soft: #e7f2ee;
     --accent-ink: #ffffff;
+    --bubble-bot: #ffffff;
+    --bubble-me: #dcf0e8;
+    --radius: 14px;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #17161a;
-      --panel: #1f1e23;
-      --ink: #f2efea;
-      --muted: #a8a29a;
-      --line: #322f37;
+      --bg: #15141a;
+      --panel: #1e1d24;
+      --sunk: #26252d;
+      --ink: #f3f0ea;
+      --muted: #a9a39a;
+      --faint: #8b857c;
+      --line: #322f3a;
       --accent: #5ec8a8;
-      --accent-ink: #12211c;
+      --accent-soft: #1d3a33;
+      --accent-ink: #10201b;
+      --bubble-bot: #262530;
+      --bubble-me: #234339;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #17161a;
-    --panel: #1f1e23;
-    --ink: #f2efea;
-    --muted: #a8a29a;
-    --line: #322f37;
+    --bg: #15141a;
+    --panel: #1e1d24;
+    --sunk: #26252d;
+    --ink: #f3f0ea;
+    --muted: #a9a39a;
+    --faint: #8b857c;
+    --line: #322f3a;
     --accent: #5ec8a8;
-    --accent-ink: #12211c;
+    --accent-soft: #1d3a33;
+    --accent-ink: #10201b;
+    --bubble-bot: #262530;
+    --bubble-me: #234339;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font: 16px/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
-  header { padding: 64px 0 40px; }
-  h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
-  .lede { font-size: 1.15rem; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--accent); }
+
+  /* Hero */
+  header { padding: 72px 0 8px; }
+  .kicker {
+    display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+    padding: 5px 11px; border-radius: 99px; margin-bottom: 20px;
+  }
+  h1 {
+    font-size: clamp(2rem, 7vw, 3.1rem); line-height: 1.08; letter-spacing: -0.03em;
+    margin: 0 0 18px; max-width: 20em;
+  }
+  .lede { font-size: clamp(1.05rem, 2.6vw, 1.25rem); color: var(--muted); margin: 0 0 30px; max-width: 32em; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .cta {
-    display: inline-block; background: var(--accent); color: var(--accent-ink);
-    text-decoration: none; font-weight: 600; padding: 13px 22px; border-radius: 10px;
+    display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: var(--accent-ink);
+    text-decoration: none; font-weight: 600; font-size: 1.02rem; padding: 14px 24px; border-radius: 11px;
   }
   .cta:hover { filter: brightness(1.08); }
-  .note { color: var(--muted); font-size: 0.95rem; margin-top: 12px; }
-  h2 { font-size: 1.15rem; margin: 40px 0 14px; letter-spacing: -0.01em; }
-  ol, ul { padding-left: 1.25em; margin: 0; }
-  li { margin-bottom: 8px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px; margin: 0 0 16px;
+  .cta-note { color: var(--faint); font-size: 0.92rem; }
+
+  /* Sections */
+  section { padding: 44px 0 4px; }
+  h2 { font-size: clamp(1.4rem, 3.4vw, 1.75rem); letter-spacing: -0.02em; margin: 0 0 10px; }
+  h3 { font-size: 1.02rem; margin: 0 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 26px; max-width: 34em; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .grid p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  /* Tutorial */
+  .step { display: grid; grid-template-columns: 34px 1fr; gap: 16px; margin-bottom: 30px; }
+  .num {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+    display: grid; place-items: center; font-weight: 700; font-size: 0.95rem;
   }
+  .step-body h3 { margin-bottom: 4px; }
+  .step-body > p { margin: 0 0 14px; color: var(--muted); }
+  .chat {
+    background: var(--sunk); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px; display: flex; flex-direction: column; gap: 9px;
+  }
+  .msg {
+    max-width: 92%; padding: 10px 13px; border-radius: 13px; font-size: 0.93rem; line-height: 1.5;
+    background: var(--bubble-bot); border: 1px solid var(--line);
+  }
+  .msg.me { align-self: flex-end; background: var(--bubble-me); border-color: transparent; }
+  .msg strong { font-weight: 650; }
+  .msg .dim { color: var(--faint); }
+  .keys { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .key {
+    font-size: 0.83rem; padding: 6px 10px; border-radius: 8px; background: var(--sunk);
+    border: 1px solid var(--line); color: var(--ink); white-space: nowrap;
+  }
+  .key.wide { flex: 1 1 100%; text-align: center; }
+  .key.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-weight: 600; }
+  .caption { font-size: 0.85rem; color: var(--faint); margin: 8px 0 0; }
+
+  /* Plans */
   table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
-  th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); }
-  th { font-weight: 600; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  th, td { text-align: left; padding: 11px 8px; border-bottom: 1px solid var(--line); }
+  th { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
   tr:last-child td { border-bottom: none; }
-  code { background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 0.9em; }
-  footer { margin: 56px 0 40px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
-  footer a { color: inherit; }
-  @media (max-width: 480px) { header { padding: 40px 0 28px; } }
+  td.plan-name { font-weight: 600; }
+
+  /* FAQ */
+  details { border-bottom: 1px solid var(--line); padding: 15px 0; }
+  details:last-of-type { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--faint); font-weight: 400; font-size: 1.2rem; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin: 10px 0 0; font-size: 0.95rem; }
+
+  .closer { text-align: center; padding: 56px 0 8px; }
+  .closer h2 { margin-bottom: 8px; }
+  .closer .sub { margin: 0 auto 24px; }
+
+  footer { margin: 52px 0 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--faint); font-size: 0.87rem; }
+  footer p { margin: 0 0 10px; }
+  code { background: var(--sunk); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 0.89em; }
+  @media (max-width: 520px) {
+    header { padding: 44px 0 4px; }
+    .step { grid-template-columns: 28px 1fr; gap: 12px; }
+    .num { width: 28px; height: 28px; font-size: 0.85rem; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <h1>Myntra Price Alerts</h1>
-    <p class="lede">Send a Myntra product link to a Telegram bot, pick your size and the price you want to pay. It watches the listing and messages you when your size is in stock at or below your price.</p>
-    <a class="cta" href="https://t.me/myntra_track_price_bot">Open the bot in Telegram</a>
-    <p class="note">Free while in beta.</p>
+    <span class="kicker">Free Telegram bot</span>
+    <h1>Buy it when it drops, not when you happen to look.</h1>
+    <p class="lede">Send a Myntra link, pick your size, name your price. You get one Telegram message the moment that size is in stock at or below it.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://t.me/myntra_track_price_bot?start=web">Start tracking on Telegram →</a>
+      <span class="cta-note">No signup. No app to install.</span>
+    </div>
   </header>
 
-  <h2>How it works</h2>
-  <div class="card">
-    <ol>
-      <li>Open a product in the Myntra app or site, tap Share, and send the link to the bot.</li>
-      <li>Tap your size. The bot shows the current price for every size.</li>
-      <li>Send the price you want to pay, and choose how often it should check.</li>
-    </ol>
-  </div>
+  <section>
+    <h2>Why sizes matter more than prices</h2>
+    <p class="sub">A Myntra listing isn't one price. Several sellers stock the same item, each with their own price and their own sizes, and the number on the page is only one of them.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Your size, its own price</h3>
+        <p>The same shoe can be ₹2,087 in size 10 and ₹2,600 in size 8. This bot watches the size you actually wear.</p>
+      </div>
+      <div class="card">
+        <h3>The cheapest seller in stock</h3>
+        <p>It compares every seller holding your size and uses the lowest price you could actually check out at.</p>
+      </div>
+      <div class="card">
+        <h3>Back-in-stock counts too</h3>
+        <p>Sold out in your size? The alert waits, and fires when it returns at your price.</p>
+      </div>
+    </div>
+  </section>
 
-  <h2>What it watches for</h2>
-  <div class="card">
-    <ul>
-      <li><strong>Your size, not the product.</strong> A shoe can be ₹2,000 in size 10 and ₹2,600 in size 8. The bot tracks the size you asked for.</li>
-      <li><strong>The cheapest seller in stock.</strong> Several sellers often list the same item at different prices.</li>
-      <li><strong>Back in stock.</strong> If your size is sold out, the alert waits until it returns at your price.</li>
-      <li><strong>One message per drop.</strong> It alerts when your price is reached, then only again if the price falls further.</li>
-    </ul>
-  </div>
+  <section id="tutorial">
+    <h2>How it works, start to finish</h2>
+    <p class="sub">Four steps, about thirty seconds. Here's exactly what you'll see.</p>
 
-  <h2>Plans</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Plan</th><th>Checks</th><th>Lasts</th></tr></thead>
-      <tbody>
-        <tr><td>Free</td><td>every 12 hours</td><td>7 days</td></tr>
-        <tr><td>₹5</td><td>every 6–8 hours</td><td>15 days</td></tr>
-        <tr><td>₹10</td><td>every 4–6 hours</td><td>45 days</td></tr>
-      </tbody>
-    </table>
-    <p class="note">Every plan is free during the beta, and nothing is charged yet. One free tracker per person; up to ten trackers in total.</p>
-  </div>
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-body">
+        <h3>Send the product link</h3>
+        <p>In the Myntra app, open the product and tap Share → Copy link. Paste it into the chat. A link copied from your browser works too.</p>
+        <div class="chat">
+          <div class="msg me">https://www.myntra.com/tshirts/hrx/…/1700944/buy</div>
+          <div class="msg">
+            <strong>HRX by Hrithik Roshan Men Yellow Printed Cotton T-shirt</strong><br>
+            ₹300 <span class="dim">₹699</span><br><br>
+            Which size do you want?
+            <div class="keys">
+              <span class="key">S · ₹300</span><span class="key">M · ₹300</span><span class="key">L · ₹300</span>
+              <span class="key">XL · sold out</span><span class="key">XXL · ₹300</span>
+            </div>
+          </div>
+        </div>
+        <p class="caption">Every size with its own live price, so you can see which ones are worth watching.</p>
+      </div>
+    </div>
 
-  <h2>Commands</h2>
-  <div class="card">
-    <ul>
-      <li><code>/list</code> — what the bot is watching for you, with a button to stop any of them</li>
-      <li><code>/history</code> — trackers that expired or were stopped, to renew or delete</li>
-      <li><code>/help</code> — how it all works</li>
-    </ul>
-  </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-body">
+        <h3>Tap your size</h3>
+        <p>Pick one. Sold-out sizes are fine to choose — that's often the point.</p>
+        <div class="chat">
+          <div class="msg">
+            Size <strong>M</strong> is ₹300 right now.<br><br>
+            What's your target price? Send the amount in rupees, e.g. <code>270</code>.
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <h2>Affiliate disclosure</h2>
-  <div class="card">
-    <p style="margin:0">When the bot tells you about a price drop, the "Buy on Myntra" button may be an affiliate link. If you buy through it, this service may earn a commission from the retailer at no extra cost to you. It never changes the price you pay, and it never changes which items get tracked or when an alert is sent — alerts are based only on the price and size you asked for.</p>
-  </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-body">
+        <h3>Name your price and pick a plan</h3>
+        <p>Type any number. Then choose how often the bot should check — faster checks catch flash sales sooner.</p>
+        <div class="chat">
+          <div class="msg me">250</div>
+          <div class="msg">
+            Which plan? Faster checks catch a price drop sooner. All plans are free during the beta.
+            <div class="keys">
+              <span class="key wide">Free · every 12 h · 7 days</span>
+              <span class="key wide">₹5 · every 6-8 h · 15 days</span>
+              <span class="key wide">₹10 · every 4-6 h · 45 days</span>
+            </div>
+          </div>
+          <div class="msg">
+            ✅ Watching <strong>HRX Men Yellow Printed T-shirt</strong> in size <strong>M</strong>.<br>
+            I'll message you when it's in stock at ₹250 or less. Right now: ₹300.
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <h2>Privacy</h2>
-  <div class="card">
-    <p style="margin:0 0 10px">The bot stores only what it needs to send your alerts: your Telegram chat ID and name, the products, sizes and target prices you asked it to watch, and the prices it has seen for those products.</p>
-    <ul style="margin:0">
-      <li>No payment details are collected or stored.</li>
-      <li>Your data is not sold, and is not shared with anyone except as needed to deliver messages to you through Telegram.</li>
-      <li>Stopping a tracker removes it from your list, and old trackers are deleted 30 days after they end.</li>
-      <li>To have your data removed, send <code>/history</code> to the bot and delete your trackers, or message the bot to ask.</li>
-    </ul>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="step-body">
+        <h3>Get on with your life</h3>
+        <p>Nothing else to do. When your price hits, one message arrives with a button straight to the product.</p>
+        <div class="chat">
+          <div class="msg">
+            🎯 <strong>Price drop!</strong><br>
+            HRX Men Yellow Printed Cotton T-shirt<br><br>
+            Size <strong>M</strong> is <strong>₹249</strong>, within your target of ₹250 <span class="dim">(MRP ₹699)</span>.<br>
+            I'll tell you again if it drops further.
+            <div class="keys">
+              <span class="key primary wide">🛒 Buy on Myntra</span>
+              <span class="key wide">Stop tracking</span>
+            </div>
+          </div>
+        </div>
+        <p class="caption">One message per drop — not a reminder every few hours.</p>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta" href="https://t.me/myntra_track_price_bot?start=web">Try it with one product →</a>
+      <span class="cta-note">Takes about 30 seconds.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Managing what you're watching</h2>
+    <div class="card">
+      <p style="margin:0 0 12px"><code>/list</code> — everything you're watching, with the current price, your target, and a button to stop any of them.</p>
+      <p style="margin:0 0 12px"><code>/history</code> — trackers that expired or you stopped. Renew one in a tap, or delete it.</p>
+      <p style="margin:0"><code>/help</code> — the whole thing again, in the chat.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Plans</h2>
+    <p class="sub">Everything is free during the beta. Nothing is charged, and no payment details are collected.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Plan</th><th>Checks your size</th><th>Runs for</th></tr></thead>
+        <tbody>
+          <tr><td class="plan-name">Free</td><td>every 12 hours</td><td>7 days</td></tr>
+          <tr><td class="plan-name">₹5</td><td>every 6–8 hours</td><td>15 days</td></tr>
+          <tr><td class="plan-name">₹10</td><td>every 4–6 hours</td><td>45 days</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">One free tracker at a time, and up to ten trackers in total.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <div class="card">
+      <details open>
+        <summary>Is it really free?</summary>
+        <p>Yes, during the beta. Every plan is selectable at no cost and no payment details are collected. If paid plans start later, you'll be told before anything changes, and the free plan stays.</p>
+      </details>
+      <details>
+        <summary>Do you make money from this?</summary>
+        <p>The "Buy on Myntra" button in an alert may be an affiliate link, which can earn a commission from the retailer if you buy through it. It costs you nothing extra and never changes the price you pay. It also has no bearing on which items get tracked or when an alert fires — those depend only on the size and price you asked for.</p>
+      </details>
+      <details>
+        <summary>What do you store about me?</summary>
+        <p>Your Telegram chat ID and name, the products, sizes and target prices you asked for, and the prices seen for those products. No payment details, ever. Nothing is sold or shared beyond delivering your messages through Telegram. Stop a tracker and it leaves your list; old trackers are deleted 30 days after they end.</p>
+      </details>
+      <details>
+        <summary>Is this an official Myntra service?</summary>
+        <p>No. It's an independent tool, not affiliated with, endorsed by, or operated by Myntra. It reads the same public product page you'd see in your browser.</p>
+      </details>
+      <details>
+        <summary>How fast will I hear about a drop?</summary>
+        <p>Within your plan's check window — up to 12 hours on the free plan, 4–6 hours on the ₹10 plan. Prices on Myntra can change again at any moment, so check the listing before buying.</p>
+      </details>
+      <details>
+        <summary>Why Telegram and not WhatsApp or email?</summary>
+        <p>Telegram bots are free to run and need no signup, which is why the beta is free. WhatsApp charges per message, so it may come later.</p>
+      </details>
+      <details>
+        <summary>How do I stop everything?</summary>
+        <p>Send <code>/list</code> and tap Stop on each tracker, or just block the bot — it stops watching and messaging you immediately.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="closer">
+    <h2>One link. One price. One message.</h2>
+    <p class="sub">Pick something you've been waiting to go on sale.</p>
+    <a class="cta" href="https://t.me/myntra_track_price_bot?start=web">Open the bot on Telegram →</a>
   </div>
 
   <footer>
-    <p>Independent price-tracking tool. Not affiliated with, endorsed by, or operated by Myntra. Product names, prices and availability belong to Myntra and its sellers, and are shown as found at the time of checking. Prices can change at any moment, so check the listing before buying.</p>
-    <p>Questions or problems: message <a href="https://t.me/myntra_track_price_bot">the bot on Telegram</a>.</p>
+    <p><strong>Affiliate disclosure.</strong> Links to Myntra in price alerts may be affiliate links, earning this service a commission on purchases at no extra cost to you. Alerts are never influenced by commission.</p>
+    <p><strong>Independence.</strong> Not affiliated with, endorsed by, or operated by Myntra. Product names, prices and availability belong to Myntra and its sellers and are shown as found at the time of checking. Prices change without notice — always confirm on the listing before buying.</p>
+    <p>Built by <a href="https://sharmasankalp.com/">Sankalp Sharma</a>. Questions, problems or data deletion requests: message <a href="https://t.me/myntra_track_price_bot?start=web">the bot</a>.</p>
   </footer>
 
 </div>
