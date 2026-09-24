@@ -164,7 +164,7 @@
     <p class="lede">Send a Myntra link, pick your size, name your price. You get one Telegram message the moment that size is in stock at or below it.</p>
     <div class="cta-row">
       <a class="cta" href="https://t.me/myntra_track_price_bot?start=web">Start tracking on Telegram →</a>
-      <span class="cta-note">No signup. No app to install.</span>
+      <span class="cta-note">No signup. Free plan, no card, no app to install.</span>
     </div>
   </header>
 
@@ -181,8 +181,8 @@
         <p>It compares every seller holding your size and uses the lowest price you could actually check out at.</p>
       </div>
       <div class="card">
-        <h3>Back-in-stock counts too</h3>
-        <p>Sold out in your size? The alert waits, and fires when it returns at your price.</p>
+        <h3>Or forget the price entirely</h3>
+        <p>Sold out in your size? Ask to be told the moment it's back in stock, at any price.</p>
       </div>
     </div>
   </section>
@@ -220,7 +220,10 @@
         <div class="chat">
           <div class="msg">
             Size <strong>M</strong> is ₹300 right now.<br><br>
-            What's your target price? Send the amount in rupees, e.g. <code>270</code>.
+            What's your target price? Send the amount in rupees, e.g. <code>270</code> — or tap below to hear about it whenever it's in stock, at any price.
+            <div class="keys">
+              <span class="key wide">🔔 Just tell me when it's in stock</span>
+            </div>
           </div>
         </div>
       </div>
@@ -237,8 +240,8 @@
             Which plan? Faster checks catch a price drop sooner. All plans are free during the beta.
             <div class="keys">
               <span class="key wide">Free · every 12 h · 7 days</span>
-              <span class="key wide">₹5 · every 6-8 h · 15 days</span>
-              <span class="key wide">₹10 · every 4-6 h · 45 days</span>
+              <span class="key wide">5 ⭐ ≈ ₹5 · every 6-8 h · 15 days</span>
+              <span class="key wide">10 ⭐ ≈ ₹10 · every 4-6 h · 45 days</span>
             </div>
           </div>
           <div class="msg">
@@ -259,7 +262,8 @@
             🎯 <strong>Price drop!</strong><br>
             HRX Men Yellow Printed Cotton T-shirt<br><br>
             Size <strong>M</strong> is <strong>₹249</strong>, within your target of ₹250 <span class="dim">(MRP ₹699)</span>.<br>
-            I'll tell you again if it drops further.
+            I'll tell you again if it drops further.<br><br>
+            🎁 Buy through the button below and you earn <strong>1 extra free tracker</strong> (0 of 10 banked). It costs you nothing extra.
             <div class="keys">
               <span class="key primary wide">🛒 Buy on Myntra</span>
               <span class="key wide">Stop tracking</span>
@@ -286,18 +290,27 @@
   </section>
 
   <section>
+    <h2>Earn free trackers</h2>
+    <p class="sub">Every alert carries a link to the product. If you buy through it, you get another free tracker.</p>
+    <div class="card">
+      <p style="margin:0 0 12px">That link is an affiliate link: if you buy through it, this service earns a commission from the retailer, at no extra cost to you and with no change to the price you pay. As a thank-you, each purchase through one of my links banks <strong>one extra free tracker</strong> for you, up to ten.</p>
+      <p style="margin:0" class="caption">Purchases are confirmed by the retailer after its returns window, so a banked tracker can take a few weeks to appear. Returned orders don't count.</p>
+    </div>
+  </section>
+
+  <section>
     <h2>Plans</h2>
-    <p class="sub">Everything is free during the beta. Nothing is charged, and no payment details are collected.</p>
+    <p class="sub">The free plan is free, permanently. Faster plans are paid in Telegram Stars, which cost roughly ₹1 each and are bought inside Telegram with UPI.</p>
     <div class="card">
       <table>
         <thead><tr><th>Plan</th><th>Checks your size</th><th>Runs for</th></tr></thead>
         <tbody>
           <tr><td class="plan-name">Free</td><td>every 12 hours</td><td>7 days</td></tr>
-          <tr><td class="plan-name">₹5</td><td>every 6–8 hours</td><td>15 days</td></tr>
-          <tr><td class="plan-name">₹10</td><td>every 4–6 hours</td><td>45 days</td></tr>
+          <tr><td class="plan-name">5 ⭐ ≈ ₹5</td><td>every 6–8 hours</td><td>15 days</td></tr>
+          <tr><td class="plan-name">10 ⭐ ≈ ₹10</td><td>every 4–6 hours</td><td>45 days</td></tr>
         </tbody>
       </table>
-      <p class="caption">One free tracker at a time, and up to ten trackers in total.</p>
+      <p class="caption">One free tracker at a time, up to ten trackers in total. No card details are ever collected — Stars are handled entirely by Telegram.</p>
     </div>
   </section>
 
@@ -306,7 +319,11 @@
     <div class="card">
       <details open>
         <summary>Is it really free?</summary>
-        <p>Yes, during the beta. Every plan is selectable at no cost and no payment details are collected. If paid plans start later, you'll be told before anything changes, and the free plan stays.</p>
+        <p>The free plan is free with no card and no signup: one tracker at a time, checked every 12 hours, for 7 days. Faster plans cost 5 or 10 Telegram Stars, and buying through an alert link earns you free trackers instead.</p>
+      </details>
+      <details>
+        <summary>What are Telegram Stars?</summary>
+        <p>Telegram's own currency for paying inside bots, bought in the Telegram app with UPI, Google Pay or Apple Pay. Roughly ₹1 per Star, in bundles. Telegram requires bots to use Stars for digital services, which is why the faster plans are priced that way rather than in rupees.</p>
       </details>
       <details>
         <summary>Do you make money from this?</summary>
@@ -327,6 +344,10 @@
       <details>
         <summary>Why Telegram and not WhatsApp or email?</summary>
         <p>Telegram bots are free to run and need no signup, which is why the beta is free. WhatsApp charges per message, so it may come later.</p>
+      </details>
+      <details>
+        <summary>Can I track something without a price in mind?</summary>
+        <p>Yes. When it asks for your target price, tap "Just tell me when it's in stock" and you'll hear the moment your size is available again, whatever it costs.</p>
       </details>
       <details>
         <summary>How do I stop everything?</summary>
